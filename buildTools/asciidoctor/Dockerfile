@@ -1,4 +1,4 @@
-FROM biz/jenkinsslave
+FROM debian:jessie
 MAINTAINER Dominik Ebert <doe@zuehlke.com>
 
 # Asciidoctor Slave Image
