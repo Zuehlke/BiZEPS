@@ -9,7 +9,9 @@ ARG ASCIID_PDF_VERSION="1.5.0.alpha.11"
 
 RUN apt-get update && apt-get install -y \
   default-jre \
+  git \
   graphviz \
+  python \
   ruby2.1 \
   rubygems \
   && rm -rf /var/lib/apt/lists/*
