@@ -8,6 +8,7 @@ ARG ASCIID_DIAGRAMM_VERSION="1.4.0"
 ARG ASCIID_PDF_VERSION="1.5.0.alpha.11"
 
 RUN apt-get update && apt-get install -y \
+  default-jre \
   graphviz \
   ruby2.1 \
   rubygems \
