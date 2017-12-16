@@ -50,7 +50,7 @@ Host             |                         |       |                      |     
 ##  Details
 The described architecture is a possible solution, how a BiZEPS project could look like.
 This setup is a good starting point which addresses flexibility, scalability and basic security needs.
-Other project requirements or customer needs may leed into a different project setup.
+Other project requirements or customer needs may lead into a different project setup.
 
 ### Docker
 ####  a) Docker daemon
