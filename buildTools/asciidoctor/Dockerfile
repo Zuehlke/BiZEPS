@@ -1,4 +1,4 @@
-FROM biz/jenkinsslave
+FROM debian:jessie
 MAINTAINER Dominik Ebert <doe@zuehlke.com>
 
 # Asciidoctor Slave Image
@@ -8,7 +8,10 @@ ARG ASCIID_DIAGRAMM_VERSION="1.4.0"
 ARG ASCIID_PDF_VERSION="1.5.0.alpha.11"
 
 RUN apt-get update && apt-get install -y \
+  default-jre \
+  git \
   graphviz \
+  python \
   ruby2.1 \
   rubygems \
   && rm -rf /var/lib/apt/lists/*
