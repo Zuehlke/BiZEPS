@@ -56,10 +56,12 @@ node {
           buildJobs = projectSettings.dockerJobs
         }
       }
-      stage("Push") {
-        parallel dockerImage.setupPushTasks {
-          dockerRegistryUser = "${projectSettings.dockerHub.user}"
-          buildJobs = projectSettings.dockerJobs
+      docker.withRegistry(env.DEFAULT_DOCKER_REGISTRY_CONNECTION, 'default-docker-registry-credentials') {
+        stage("Push") {
+          parallel dockerImage.setupPushTasks {
+            dockerRegistryUser = "${projectSettings.dockerHub.user}"
+            buildJobs = projectSettings.dockerJobs
+          }
         }
       }
     }
