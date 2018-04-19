@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM alpine:3.7
 
 MAINTAINER Dominik Ebert <doe@zuehlke.com>
 
@@ -12,7 +12,7 @@ RUN apk add --no-cache \
 RUN mkdir -p ${app_dir} && \
     mkdir -p ${target_dir}
 
-COPY ./Makefile ${app_dir}
+COPY resources/Makefile ${app_dir}
 
 WORKDIR ${app_dir}
 
