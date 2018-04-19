@@ -7,3 +7,5 @@ RUN apk update && apk add --no-cache \
   make \
   cmake \
   automake
+
+CMD ["/bin/bash"]

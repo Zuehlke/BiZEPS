@@ -5,3 +5,5 @@ MAINTAINER Peter Schmid <peter.schmid@zuehlke.com>
 
 RUN apk update && apk add --no-cache \
   g++
+
+CMD ["/bin/bash"]
