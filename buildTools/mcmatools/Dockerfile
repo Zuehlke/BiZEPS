@@ -3,7 +3,7 @@ MAINTAINER Peter Schmid <peter.schmid@zuehlke.com>
 
 # add basic build tools: make cmake and auto tools to jenkins slave
 
-RUN apk add --no-cache \
+RUN apk update && apk add --no-cache \
   make \
   cmake \
   automake

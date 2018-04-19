@@ -3,5 +3,5 @@ MAINTAINER Peter Schmid <peter.schmid@zuehlke.com>
 
 # add g++ to basic build tools image
 
-RUN apk add --update --no-cache \
+RUN apk update && apk add --no-cache \
   g++
