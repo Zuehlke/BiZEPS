@@ -1,10 +1,9 @@
-FROM debian:jessie
+FROM alpine:3.7
 MAINTAINER Peter Schmid <peter.schmid@zuehlke.com>
 
 # add basic build tools: make cmake and auto tools to jenkins slave
 
-RUN apt-get update && apt-get install -y \
+RUN apk add --no-cache \
   make \
   cmake \
-  automake \
-  && rm -rf /var/lib/apt/lists/*
+  automake
