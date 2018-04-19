@@ -2,5 +2,5 @@ version: '2'
 services:
   mcmatools:
     build: .
-    image: biz/mcmatools
+    image: bizeps/mcmatools
     container_name: mcmatools
