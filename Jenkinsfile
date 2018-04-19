@@ -26,7 +26,6 @@ node {
       {"imageName": "jenkins",        "dockerfilePath": "./buildServer/jenkins/master" },
       {"imageName": "certgenerator",  "dockerfilePath": "./utils/certGenerator"},
       {"imageName": "mcmatools",      "dockerfilePath": "./buildTools/mcmatools"},
-      {"imageName": "asciidoctor",    "dockerfilePath": "./buildTools/asciidoctor"},
     ]
   }'''
 
