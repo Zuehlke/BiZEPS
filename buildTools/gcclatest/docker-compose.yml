@@ -2,5 +2,5 @@ version: '2'
 services:
   gcc:
     build: .
-    image: biz/gcclatest
+    image: bizeps/gcclatest
     container_name: bizgcclatest
