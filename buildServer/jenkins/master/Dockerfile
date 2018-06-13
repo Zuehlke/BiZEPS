@@ -12,6 +12,7 @@ RUN apk update && apk add --no-cache \
   openssh-client \
   openjdk8-jre \
   ttf-dejavu \
+  tini \
   unzip
 
 # Definition of jenkins user
@@ -28,12 +29,15 @@ ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
 # Jenkins is run with user `jenkins`, uid = 1000
 # If you bind mount a volume from the host or a data container, 
 # ensure you use the same uid
-RUN addgroup -g ${gid} ${group} \
+RUN mkdir -p $JENKINS_HOME \
+    && chown ${uid}:${gid} $JENKINS_HOME \
+    && addgroup -g ${gid} ${group} \
     && adduser -h "$JENKINS_HOME" -u ${uid} -G ${group} -s /bin/bash -D ${user}
     
 # Install docker client to connect to a docker host from the container
+# Downloaded from 'https://download.docker.com/linux/static/stable/'
 RUN mkdir -p /var/tmp
-COPY resources/docker-client-17.03.0-ce.tgz /var/tmp
+COPY resources/x86_64/docker-client-17.03.0-ce.tgz /var/tmp
 RUN tar xzvf /var/tmp/docker-client-17.03.0-ce.tgz -C /var/tmp
 RUN cp /var/tmp/docker/docker /usr/local/bin/docker
 RUN rm -rf /var/tmp/docker
@@ -43,17 +47,14 @@ RUN rm -rf /var/tmp/docker
 # or config file with your custom jenkins Docker image.
 RUN mkdir -p /usr/share/jenkins/ref/init.groovy.d
 
-# Use tini as subreaper in Docker container to adopt zombie processes 
-COPY resources/tini-static-amd64 /bin/tini
-
 COPY resources/init.groovy /usr/share/jenkins/ref/init.groovy.d/tcp-slave-agent-port.groovy
 
 # jenkins version being bundled in this docker image
 ARG JENKINS_VERSION
-ENV JENKINS_VERSION ${JENKINS_VERSION:-2.107.2}
+ENV JENKINS_VERSION ${JENKINS_VERSION:-2.121.1}
 
 # jenkins.war checksum, download will be validated using it
-ARG JENKINS_SHA=079ab885be74ea3dd4d2a57dd804a296752fae861f2d7c379bce06b674ae67ed
+ARG JENKINS_SHA=5bb075b81a3929ceada4e960049e37df5f15a1e3cfc9dc24d749858e70b48919
 
 # Can be used to customize where jenkins.war get downloaded from
 ARG JENKINS_URL=https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war
@@ -84,9 +85,10 @@ USER ${user}
 
 COPY resources/jenkins-support /usr/local/bin/jenkins-support
 COPY resources/jenkins.sh /usr/local/bin/jenkins.sh
-ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/jenkins.sh"]
+ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/jenkins.sh"]
 
 # from a derived Dockerfile, can use `RUN plugins.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
+COPY resources/plugins.sh /usr/local/bin/plugins.sh
 COPY resources/install-plugins.sh /usr/local/bin/install-plugins.sh
 COPY resources/plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
