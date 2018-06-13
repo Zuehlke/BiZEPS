@@ -12,6 +12,7 @@ RUN apk update && apk add --no-cache \
   openssh-client \
   openjdk8-jre \
   ttf-dejavu \
+  tini \
   unzip
 
 # Definition of jenkins user
@@ -28,7 +29,9 @@ ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
 # Jenkins is run with user `jenkins`, uid = 1000
 # If you bind mount a volume from the host or a data container, 
 # ensure you use the same uid
-RUN addgroup -g ${gid} ${group} \
+RUN mkdir -p $JENKINS_HOME \
+    && chown ${uid}:${gid} $JENKINS_HOME \
+    && addgroup -g ${gid} ${group} \
     && adduser -h "$JENKINS_HOME" -u ${uid} -G ${group} -s /bin/bash -D ${user}
     
 # Install docker client to connect to a docker host from the container
@@ -43,9 +46,6 @@ RUN rm -rf /var/tmp/docker
 # to set on a fresh new installation. Use it to bundle additional plugins 
 # or config file with your custom jenkins Docker image.
 RUN mkdir -p /usr/share/jenkins/ref/init.groovy.d
-
-# Use tini as subreaper in Docker container to adopt zombie processes 
-COPY resources/tini-static-amd64 /bin/tini
 
 COPY resources/init.groovy /usr/share/jenkins/ref/init.groovy.d/tcp-slave-agent-port.groovy
 
@@ -85,9 +85,10 @@ USER ${user}
 
 COPY resources/jenkins-support /usr/local/bin/jenkins-support
 COPY resources/jenkins.sh /usr/local/bin/jenkins.sh
-ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/jenkins.sh"]
+ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/jenkins.sh"]
 
 # from a derived Dockerfile, can use `RUN plugins.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
+COPY resources/plugins.sh /usr/local/bin/plugins.sh
 COPY resources/install-plugins.sh /usr/local/bin/install-plugins.sh
 COPY resources/plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
