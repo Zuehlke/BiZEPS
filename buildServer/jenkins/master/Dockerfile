@@ -32,8 +32,9 @@ RUN addgroup -g ${gid} ${group} \
     && adduser -h "$JENKINS_HOME" -u ${uid} -G ${group} -s /bin/bash -D ${user}
     
 # Install docker client to connect to a docker host from the container
+# Downloaded from 'https://download.docker.com/linux/static/stable/'
 RUN mkdir -p /var/tmp
-COPY resources/docker-client-17.03.0-ce.tgz /var/tmp
+COPY resources/x86_64/docker-client-17.03.0-ce.tgz /var/tmp
 RUN tar xzvf /var/tmp/docker-client-17.03.0-ce.tgz -C /var/tmp
 RUN cp /var/tmp/docker/docker /usr/local/bin/docker
 RUN rm -rf /var/tmp/docker
