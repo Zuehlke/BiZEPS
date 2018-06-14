@@ -5,7 +5,7 @@ MAINTAINER Dominik Ebert <doe@zuehlke.com>
 # See: https://github.com/jenkinsci/docker
 
 ARG CPU_ARCH=x86_64
-ARG DOCKER_CLIENT_VERSION=17.03.0
+ARG DOCKER_CLIENT_VERSION=18.03.1
 
 RUN apk update && apk add --no-cache \
   bash \
