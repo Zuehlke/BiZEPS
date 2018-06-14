@@ -4,6 +4,9 @@ MAINTAINER Dominik Ebert <doe@zuehlke.com>
 # Modified official Jenkins Dockerfile
 # See: https://github.com/jenkinsci/docker
 
+ARG CPU_ARCH=x86_64
+ARG DOCKER_CLIENT_VERSION=17.03.0
+
 RUN apk update && apk add --no-cache \
   bash \
   coreutils \
@@ -37,8 +40,8 @@ RUN mkdir -p $JENKINS_HOME \
 # Install docker client to connect to a docker host from the container
 # Downloaded from 'https://download.docker.com/linux/static/stable/'
 RUN mkdir -p /var/tmp
-COPY resources/x86_64/docker-client-17.03.0-ce.tgz /var/tmp
-RUN tar xzvf /var/tmp/docker-client-17.03.0-ce.tgz -C /usr/local/bin/docker \
+COPY resources/${CPU_ARCH}/docker-client-${DOCKER_CLIENT_VERSION}-ce.tgz /var/tmp
+RUN tar xzvf /var/tmp/docker-client-${DOCKER_CLIENT_VERSION}-ce.tgz -C /usr/local/bin/docker \
     && rm -rf /var/tmp
 
 # `/usr/share/jenkins/ref/` contains all reference configuration we want 
