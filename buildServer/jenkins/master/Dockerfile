@@ -41,7 +41,8 @@ RUN mkdir -p $JENKINS_HOME \
 # Downloaded from 'https://download.docker.com/linux/static/stable/'
 RUN mkdir -p /var/tmp
 COPY resources/${CPU_ARCH}/docker-client-${DOCKER_CLIENT_VERSION}-ce.tgz /var/tmp
-RUN tar xzvf /var/tmp/docker-client-${DOCKER_CLIENT_VERSION}-ce.tgz -C /usr/local/bin/docker \
+RUN tar xzvf /var/tmp/docker-client-${DOCKER_CLIENT_VERSION}-ce.tgz -C /var/tmp \
+    && cp /var/tmp/docker/docker /usr/local/bin/docker \
     && rm -rf /var/tmp
 
 # `/usr/share/jenkins/ref/` contains all reference configuration we want 
