@@ -38,9 +38,8 @@ RUN mkdir -p $JENKINS_HOME \
 # Downloaded from 'https://download.docker.com/linux/static/stable/'
 RUN mkdir -p /var/tmp
 COPY resources/x86_64/docker-client-17.03.0-ce.tgz /var/tmp
-RUN tar xzvf /var/tmp/docker-client-17.03.0-ce.tgz -C /var/tmp
-RUN cp /var/tmp/docker/docker /usr/local/bin/docker
-RUN rm -rf /var/tmp/docker
+RUN tar xzvf /var/tmp/docker-client-17.03.0-ce.tgz -C /usr/local/bin/docker \
+    && rm -rf /var/tmp
 
 # `/usr/share/jenkins/ref/` contains all reference configuration we want 
 # to set on a fresh new installation. Use it to bundle additional plugins 
