@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine:3.8
 MAINTAINER Dominik Ebert <doe@zuehlke.com>
 
 # Modified official Jenkins Dockerfile
