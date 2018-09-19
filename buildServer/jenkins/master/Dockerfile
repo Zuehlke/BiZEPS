@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine:3.8
 MAINTAINER Dominik Ebert <doe@zuehlke.com>
 
 # Modified official Jenkins Dockerfile
@@ -76,10 +76,10 @@ COPY resources/init.groovy /usr/share/jenkins/ref/init.groovy.d/tcp-slave-agent-
 
 # jenkins version being bundled in this docker image
 ARG JENKINS_VERSION
-ENV JENKINS_VERSION ${JENKINS_VERSION:-2.121.1}
+ENV JENKINS_VERSION ${JENKINS_VERSION:-2.138.1}
 
 # jenkins.war checksum, download will be validated using it
-ARG JENKINS_SHA=5bb075b81a3929ceada4e960049e37df5f15a1e3cfc9dc24d749858e70b48919
+ARG JENKINS_SHA=ecb84b6575e86957b902cce5e68e360e6b0768b0921baa405e61d314239e5b27
 
 # Can be used to customize where jenkins.war get downloaded from
 ARG JENKINS_URL=https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war
