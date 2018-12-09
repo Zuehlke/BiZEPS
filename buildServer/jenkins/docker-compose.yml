@@ -2,7 +2,7 @@ version: '2'
 services:
   jenkins:
     build: ./master
-    image: bizeps/jenkins:2.138.3-r1
+    image: bizeps/jenkins:2.150.1-r1
     container_name: bizJenkins
     restart: always
     ports:
