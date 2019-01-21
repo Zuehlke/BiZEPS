@@ -27,7 +27,7 @@ MAINTAINER Dominik Ebert <doe@zuehlke.com>
 # THE SOFTWARE.
 
 ARG CPU_ARCH=x86_64
-ARG DOCKER_CLIENT_VERSION=18.03.1
+ARG DOCKER_CLIENT_VERSION=18.09.1
 
 RUN apk update && apk add --no-cache \
   bash \
@@ -62,8 +62,8 @@ RUN mkdir -p $JENKINS_HOME \
 # Install docker client to connect to a docker host from the container
 # Downloaded from 'https://download.docker.com/linux/static/stable/'
 RUN mkdir -p /var/tmp
-COPY resources/${CPU_ARCH}/docker-client-${DOCKER_CLIENT_VERSION}-ce.tgz /var/tmp
-RUN tar xzvf /var/tmp/docker-client-${DOCKER_CLIENT_VERSION}-ce.tgz -C /var/tmp \
+COPY resources/${CPU_ARCH}/docker-client-${DOCKER_CLIENT_VERSION}.tgz /var/tmp
+RUN tar xzvf /var/tmp/docker-client-${DOCKER_CLIENT_VERSION}.tgz -C /var/tmp \
     && cp /var/tmp/docker/docker /usr/local/bin/docker \
     && rm -rf /var/tmp
 
