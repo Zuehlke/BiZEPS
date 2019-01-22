@@ -49,11 +49,15 @@ node {
   docker.withServer(env.DEFAULT_DOCKER_HOST_CONNECTION, 'default-docker-host-credentials') {
     try {
       stage("Build") {
-        parallel dockerImage.setupBuildTasks {
+        def buildTasks = dockerImage.setupBuildTasks {
           dockerRegistryUser = "${projectSettings.dockerHub.user}"
           buildJobs = projectSettings.dockerJobs
         }
+        for (task in buildTasks.values()) {
+          task.call()
+        }
       }
+      
       docker.withRegistry(env.DEFAULT_DOCKER_REGISTRY_CONNECTION, 'default-docker-registry-credentials') {
         stage("Push") {
           parallel dockerImage.setupPushTasks {
@@ -65,7 +69,7 @@ node {
     }
     finally {
       stage("Clean up") {
-        parallel dockerImage.setupRemoveTasks {
+        parallel dockerImage.setupClenupAllUnusedTask {
           dockerRegistryUser = "${projectSettings.dockerHub.user}"
           buildJobs = projectSettings.dockerJobs
         }
