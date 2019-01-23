@@ -2,5 +2,5 @@ version: '2'
 services:
   mcmatools:
     build: .
-    image: bizeps/mcmatools
+    image: bizeps/mcmatools:19.01-r1
     container_name: mcmatools
