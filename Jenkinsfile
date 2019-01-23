@@ -25,8 +25,8 @@ node {
     "dockerJobs": [
       {"imageName": "jenkins",        "dockerfilePath": "./buildServer/jenkins/master" },
       {"imageName": "certgenerator",  "dockerfilePath": "./utils/certGenerator"},
+      {"imageName": "gcc",            "dockerfilePath": "./buildTools/gcc"},
       {"imageName": "mcmatools",      "dockerfilePath": "./buildTools/mcmatools"},
-      {"imageName": "gcclatest",      "dockerfilePath": "./buildTools/gcclatest"}
     ]
   }'''
 

@@ -1,7 +1,7 @@
 FROM alpine:3.8
 MAINTAINER Peter Schmid <peter.schmid@zuehlke.com>
 
-# Add basic build tools: make, cmake and auto tools
+# Basic build tools: make, cmake and auto tools
 
 # User settings
 ARG USER=Tron
