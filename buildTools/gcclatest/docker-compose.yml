@@ -1,6 +1,0 @@
-version: '2'
-services:
-  gcc:
-    build: .
-    image: bizeps/gcclatest
-    container_name: bizgcclatest
