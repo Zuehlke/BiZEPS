@@ -1,0 +1,6 @@
+version: '2'
+services:
+  gcc:
+    build: .
+    image: bizeps/gcc:6.4-r1
+    container_name: gcc
