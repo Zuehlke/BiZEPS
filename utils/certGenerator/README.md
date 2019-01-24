@@ -1,7 +1,13 @@
 # certGenerator
+A utility to create a self signed root CA and derived server and client certificate and key.
+
 `docker-compose run --rm certGenerator [rebuild | all | clean | server | client]`
 
-Generates self signed root CA and derived server and client certificate and key.
+##  Changelog
+- certgenerator:19.01-r1
+  - Alpine v3.8
+  - make v4.2.1-r2
+  - openssl v1.0.2q-r0
 
 ##  Usage
   - `docker-compose run --rm certGenerator`:
