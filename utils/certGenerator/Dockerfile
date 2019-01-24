@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine:3.8
 
 MAINTAINER Dominik Ebert <doe@zuehlke.com>
 
@@ -6,8 +6,8 @@ ARG app_dir=/var/boxer
 ENV target_dir=/var/build
 
 RUN apk add --no-cache \
-  make \
-  openssl
+  make=4.2.1-r2 \
+  openssl=1.0.2q-r0
 
 RUN mkdir -p ${app_dir} && \
     mkdir -p ${target_dir}
