@@ -71,12 +71,14 @@ node {
     }
     finally {
       stage("Clean up") {
-        parallel dockerImage.setupClenupAllUnusedTask {
+        def cleanupTasks = dockerImage.setupClenupAllUnusedTask {
           dockerRegistryUser = "${projectSettings.dockerHub.user}"
           buildJobs = projectSettings.dockerJobs
+        }
+        for (task in cleanupTasks.values()) {
+          task.call()
         }
       }
     }
   }
-
 }
