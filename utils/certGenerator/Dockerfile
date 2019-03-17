@@ -13,7 +13,7 @@ ARG GID=1000
 
 RUN apk update && apk add --no-cache \
   make=4.2.1-r2 \
-  openssl=1.1.1a-r1 \
+  openssl=1.1.1b-r1 \
   && apk del --purge
 
 # Create user
