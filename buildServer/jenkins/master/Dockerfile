@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:3.9
 MAINTAINER Dominik Ebert <doe@zuehlke.com>
 
 # Modified official Jenkins Dockerfile
@@ -52,13 +52,13 @@ ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
 
 # Jenkins is run with user `jenkins`, uid = 1000
-# If you bind mount a volume from the host or a data container, 
+# If you bind mount a volume from the host or a data container,
 # ensure you use the same uid
 RUN mkdir -p $JENKINS_HOME \
     && chown ${uid}:${gid} $JENKINS_HOME \
     && addgroup -g ${gid} ${group} \
     && adduser -h "$JENKINS_HOME" -u ${uid} -G ${group} -s /bin/bash -D ${user}
-    
+
 # Install docker client to connect to a docker host from the container
 # Downloaded from 'https://download.docker.com/linux/static/stable/'
 RUN mkdir -p /var/tmp
@@ -67,8 +67,8 @@ RUN tar xzvf /var/tmp/docker-client-${DOCKER_CLIENT_VERSION}.tgz -C /var/tmp \
     && cp /var/tmp/docker/docker /usr/local/bin/docker \
     && rm -rf /var/tmp
 
-# `/usr/share/jenkins/ref/` contains all reference configuration we want 
-# to set on a fresh new installation. Use it to bundle additional plugins 
+# `/usr/share/jenkins/ref/` contains all reference configuration we want
+# to set on a fresh new installation. Use it to bundle additional plugins
 # or config file with your custom jenkins Docker image.
 RUN mkdir -p /usr/share/jenkins/ref/init.groovy.d
 
@@ -76,18 +76,18 @@ COPY resources/init.groovy /usr/share/jenkins/ref/init.groovy.d/tcp-slave-agent-
 
 # jenkins version being bundled in this docker image
 ARG JENKINS_VERSION
-ENV JENKINS_VERSION ${JENKINS_VERSION:-2.150.2}
+ENV JENKINS_VERSION ${JENKINS_VERSION:-2.164.3}
 
 # jenkins.war checksum, download will be validated using it
-ARG JENKINS_SHA=fab70f4e209855e0806315cc419e0cbbbf1bd9b31c6f221f7702aa21145040f8
+ARG JENKINS_SHA=a8af991f9085ff7f12baa2c9978554b2a18e5c4ed84327224d30e269e8f4a50e
 
 # Can be used to customize where jenkins.war get downloaded from
 ARG JENKINS_URL=https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war
 
-# could use ADD but this one does not check Last-Modified header neither does it allow to control checksum 
+# could use ADD but this one does not check Last-Modified header neither does it allow to control checksum
 # see https://github.com/docker/docker/issues/8331
 RUN curl -fsSL ${JENKINS_URL} -o /usr/share/jenkins/jenkins.war \
-  && echo sha256sum "/usr/share/jenkins/jenkins.war" \
+  && sha256sum "/usr/share/jenkins/jenkins.war" \
   && echo "${JENKINS_SHA}  /usr/share/jenkins/jenkins.war" | sha256sum -c -
 
 ENV JENKINS_UC https://updates.jenkins.io
@@ -102,7 +102,7 @@ EXPOSE ${agent_port}
 
 ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
 
-# Jenkins home directory is a volume, so configuration and build history 
+# Jenkins home directory is a volume, so configuration and build history
 # can be persisted and survive image upgrades
 VOLUME $JENKINS_HOME
 
