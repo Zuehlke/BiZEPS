@@ -1,4 +1,4 @@
-FROM alpine:3.9
+FROM alpine:3.10.1
 MAINTAINER Dominik Ebert <doe@zuehlke.com>
 
 # Modified official Jenkins Dockerfile
@@ -48,6 +48,11 @@ ARG gid=1000
 ARG http_port=8080
 ARG agent_port=50000
 
+# jenkins version being bundled in this docker image and checksum
+ARG JENKINS_VERSION
+ENV JENKINS_VERSION ${JENKINS_VERSION:-2.176.2}
+ARG JENKINS_SHA=33a6c3161cf8de9c8729fd83914d781319fd1569acf487c7b1121681dba190a5
+
 ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
 
@@ -73,13 +78,6 @@ RUN tar xzvf /var/tmp/docker-client-${DOCKER_CLIENT_VERSION}.tgz -C /var/tmp \
 RUN mkdir -p /usr/share/jenkins/ref/init.groovy.d
 
 COPY resources/init.groovy /usr/share/jenkins/ref/init.groovy.d/tcp-slave-agent-port.groovy
-
-# jenkins version being bundled in this docker image
-ARG JENKINS_VERSION
-ENV JENKINS_VERSION ${JENKINS_VERSION:-2.164.3}
-
-# jenkins.war checksum, download will be validated using it
-ARG JENKINS_SHA=a8af991f9085ff7f12baa2c9978554b2a18e5c4ed84327224d30e269e8f4a50e
 
 # Can be used to customize where jenkins.war get downloaded from
 ARG JENKINS_URL=https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war
