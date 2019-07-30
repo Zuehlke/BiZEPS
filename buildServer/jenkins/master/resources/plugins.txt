@@ -1,3 +1,4 @@
+authorize-project
 blueocean
 git
 git-parameter
