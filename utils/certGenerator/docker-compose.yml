@@ -2,7 +2,7 @@ version: '2'
 services:
   certGenerator:
     build: .
-    image: bizeps/certgenerator:19.03-r2
+    image: bizeps/certgenerator:3.10.3-r1
     container_name: certGenerator
     volumes:
     - ./output:/var/build
