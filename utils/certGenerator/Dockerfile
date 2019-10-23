@@ -1,4 +1,4 @@
-FROM alpine:3.9
+FROM alpine:3.10.3
 
 MAINTAINER Dominik Ebert <doe@zuehlke.com>
 
@@ -13,13 +13,13 @@ ARG GID=1000
 
 RUN apk update && apk add --no-cache \
   make=4.2.1-r2 \
-  openssl=1.1.1b-r1 \
+  openssl=1.1.1d-r0 \
   && apk del --purge
 
 # Create user
 RUN addgroup -g ${GID} ${GROUP} \
     && adduser -u ${UID} -G ${GROUP} -D ${USER}
-  
+
 RUN mkdir -p ${app_dir} && \
     mkdir -p ${target_dir}
 
