@@ -38,7 +38,8 @@ RUN apk update && apk add --no-cache \
   openjdk8-jre \
   ttf-dejavu \
   tini \
-  unzip
+  unzip \
+  && apk del --purge
 
 # Definition of jenkins user
 ARG user=jenkins
@@ -50,8 +51,8 @@ ARG agent_port=50000
 
 # jenkins version being bundled in this docker image and checksum
 ARG JENKINS_VERSION
-ENV JENKINS_VERSION ${JENKINS_VERSION:-2.176.2}
-ARG JENKINS_SHA=33a6c3161cf8de9c8729fd83914d781319fd1569acf487c7b1121681dba190a5
+ENV JENKINS_VERSION ${JENKINS_VERSION:-2.190.1}
+ARG JENKINS_SHA=46fb1d25d9423fc66aadd648dc74b9772863a7fbbd89bfc14c873cd0c3436f05
 
 ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
