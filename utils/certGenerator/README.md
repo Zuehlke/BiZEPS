@@ -7,6 +7,7 @@ A utility to create a self signed root CA and derived server and client certific
 - certgenerator:3.10.3-r1
 - Deprecated
   - certgenerator:19.03-rx
+  
 ##  Usage
   - `docker-compose run --rm certGenerator`:
     * Removes current CA and certificates and generates new CA and certificates

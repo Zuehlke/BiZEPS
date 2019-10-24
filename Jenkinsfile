@@ -24,6 +24,7 @@ node {
     },
     "dockerJobs": [
       {"imageName": "jenkins",        "dockerfilePath": "./buildServer/jenkins/master" },
+      {"imageName": "awscli",         "dockerfilePath": "./utils/awsCli"},
       {"imageName": "certgenerator",  "dockerfilePath": "./utils/certGenerator"},
       {"imageName": "gcc",            "dockerfilePath": "./buildTools/gcc"},
       {"imageName": "mcmatools",      "dockerfilePath": "./buildTools/mcmatools"},
@@ -31,7 +32,7 @@ node {
   }'''
 
   def triggers = jobProperties.getJobBuildTriggers{}
-  
+
   properties([
     pipelineTriggers(triggers),
     buildDiscarder(logRotator(
@@ -40,7 +41,7 @@ node {
   ])
 
   def branchNameParameter = "*/${buildUtils.getCurrentBuildBranch()}"
-  
+
   repositoryUtils.checkoutBranch {
     stageName = 'Checkout'
     branchName = branchNameParameter
@@ -59,7 +60,7 @@ node {
           task.call()
         }
       }
-      
+
       docker.withRegistry(env.DEFAULT_DOCKER_REGISTRY_CONNECTION, 'default-docker-registry-credentials') {
         stage("Push") {
           parallel dockerImage.setupPushTasks {

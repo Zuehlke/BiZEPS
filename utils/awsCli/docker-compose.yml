@@ -1,0 +1,6 @@
+version: '3'
+services:
+  awsCli:
+    build: .
+    image: bizeps/awscli:1.16.265-r1
+    container_name: awsCli
