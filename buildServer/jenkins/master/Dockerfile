@@ -27,7 +27,7 @@ MAINTAINER Dominik Ebert <doe@zuehlke.com>
 # THE SOFTWARE.
 
 ARG CPU_ARCH=x86_64
-ARG DOCKER_CLIENT_VERSION=18.09.1
+ARG DOCKER_CLIENT_VERSION=19.03.4
 
 RUN apk update && apk add --no-cache \
   bash \
