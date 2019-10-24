@@ -21,4 +21,5 @@ RUN addgroup -g ${GID} ${GROUP} \
 
 USER ${USER}
 
-ENTRYPOINT ["aws"]
+ENTRYPOINT ["sh", "-c"]
+CMD ["aws"]
