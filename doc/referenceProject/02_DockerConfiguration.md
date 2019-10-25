@@ -29,7 +29,7 @@ The BiZEPS reference project starts the daemon with the following parameters:
 The reference project protects the REST API with two approaches:
 
 **TLS authentication (certificates):**
-Clients have to authenticate themself with a TLS certificate before they can 
+Clients have to authenticate themself with a TLS certificate before they can
 interact with the docker daemon through the docker REST API.
 
 **Do not publish in the network:**
@@ -39,7 +39,7 @@ Therefore it is not possible to access the docker REST API from the network.
 On the one hand this is a limitation but also improves the security.
 
 **TLS Certificates**
-The [certGenerator utility](/utils/certGenerator/summary.md) of the BiZEPS project can be used
+The [certGenerator utility](/utils/certGenerator/readme.md) of the BiZEPS project can be used
 to generate self signed client and server TLS certificates.
 
 [prev: BiZEPS Reference Project Overview](01_BizepsReferenceProject.md) | [next: Jenkins Configuration](03_JenkinsConfiguration.md)

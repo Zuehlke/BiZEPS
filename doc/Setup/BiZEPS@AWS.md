@@ -1,52 +1,39 @@
 #	Using BiZEPS with Amazon Cloud
-How to setup BiZEPS on AWS.
 
 ##	Setup
 ###	Selecting Image
-- Used Image from Amazon Market Place:
-[Amazon ECS-Optimized Amazon Linux AMI](https://aws.amazon.com/marketplace/pp/B00U6QTYI2/ref=sp_mpg_product_title?ie=UTF8&sr=0-2)
+- Used Image from Amazon Market Place
+  - **Amazon Linux 2 AMI (HVM), SSD Volume Type (64-bit x86 or 64-bit Arm)**
 - Modify Security Settings
-	- Open Port 22 for SSH (Putty) for current Address only
-	- Open Port 8080 for Webserver access
-- Connect with Putty, private key
+	- Open Port 22 for SSH (Putty) for current Address only (hint: Only open when needed)
+	- Open Port 8080 for webserver access (build server)
+- Connect with Putty and private key
   - User: ec2-user
 
-###	Install and Startup Docker
-- Install
-	- `sudo yum update -y`
-	- `sudo yum install -y docker`
-	- Version 1.7.1 was already installed
+###	Install and Setup Docker
+Execute the following commands via SSH on the cloud instance to setup docker
+- `sudo yum update -y`
+- `sudo yum install -y docker`
+  - Optional: `sudo amazon-linux-extras install docker`
 - `sudo service docker start`
-- Add ec2-user to use the service without sudo
-	- `sudo usermod -a -G docker ec2-user`
-- Logout and log in to pick new docker group permissions
-- Configure docker
-	- modify `/etc/sysconfig/docker`
-	- added `-H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375`
+- `sudo systemctl start docker`
+  - To start docker service after a restart
+- `sudo usermod -a -G docker ec2-user`
+  - Add ec2-user to use the service without sudo
+- Logout and log in to pick new docker group permissions or reboot
+- Optional: Install docker-compose:
+  - `sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose`
+  - `sudo chmod +x /usr/local/bin/docker-compose`
 
-###	Access Private Git Repo from AWS
-- Install Git
-	- `sudo yum install -y git`
-- Create new SSH keys to access private git repo from AWS cloud
-- Add the **private** key to the aws ssh client
-	- `ssh-add ~/.ssh/id_rsa`
-- Add the **public** key to the git repo
-	- `cat ~/.ssh/id_rsa.pub`
+### Configure Docker Daemon (TLS)
+Configure the docker daemon to enable the docker REST API on the network interface and secure the API with TLS authentication.
 
-###	Setup BiZEPS
-- Clone the BiZEPS repo
-- execute buildBiZEPS.sh
-
-### Configure BiZEPS
-- Temporary set the Amazon BiZEPS Security settings,
-  to allow only my IP at Port 80 and 8080
-- execute jenkinsStart.sh
-- Starting BiZEPS on AWS micro instance takes much longer than expected!
-- Working with Jenkins on micro instance is very slow...
-
-###	Issue
-It seems as if the SSH client of the docker slave cannot be started or connected
-
- 
-
- 
+- Use the [certGenerator utility](/utils/certGenerator/readme.md) to create the required certificates
+  - `docker run --rm -u root -v /srv/certs/docker:/var/build bizeps/certgenerator`
+- Configure docker daemon to use the certificates
+	- Open `/etc/sysconfig/docker`
+  - Add or modify the options line
+    - `OPTIONS="-H unix:///var/run/docker.sock -H tcp://0.0.0.0:2376 --tlsverify --tlscacert=/srv/certs/docker/server/ca.pem --tlscert=/srv/certs/docker/server/cert.pem --tlskey=/srv/certs/docker/server/key.pem --default-ulimit nofile=1024:4096"`
+  - `sudo service docker restart`
+  - Verify that the configuration is in use
+    - `ps aux | grep docker`
