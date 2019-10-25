@@ -70,7 +70,7 @@ A client has to authenticate himself before he can interact with the REST API.
 The certificates can be stored on the host, the docker daemon needs access to the server certificates.
 With the client certificates the Jenkins master can authenticate himself to the docker daemon.
 
-The BiZEPS projects provides a [certGenerator utility](/utils/certGenerator/summary.md) to create self signed server and client certificates.
+The BiZEPS projects provides a [certGenerator utility](/utils/certGenerator/readme.md) to create self signed server and client certificates.
 
 ### Network
 ####  d) eth0
