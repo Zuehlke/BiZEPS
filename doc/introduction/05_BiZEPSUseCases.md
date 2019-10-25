@@ -47,6 +47,3 @@
 - Connect to cloud
   - Break resource peaks
   - Outsource full build infrastructure
-
-#  What's Next?
-[Current project state](06_BiZEPSState.md)

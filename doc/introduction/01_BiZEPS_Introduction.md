@@ -1,7 +1,5 @@
 ![logo](../Logo/BiZEPS_Logo_small.jpg)
 
-
-
 #   Introduction to BiZEPS
 ##  What's BiZEPS?
 - Open Source Zuehlke Embedded Build System

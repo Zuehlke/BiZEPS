@@ -2,18 +2,15 @@
 
 **Zühlke Embedded Build System**
 
-[Release notes](ReleaseNotes.md)
-
 #   Documentation
 - [What is BiZEPS](doc/introduction/01_BiZEPS_Introduction.md)
 - [BiZEPS Reference Project](doc/referenceProject/01_BizepsReferenceProject.md)
+- [BiZEPS on AWS](doc/Setup/BiZEPS_AWS_EC2.md)
 
 #   Overview
 BiZEPS realizes the continuous integration build with Jenkins and Docker.
-The Jenkins master runs in a docker container.
-For each build job, a Jenkins slave runs in its own container.
-Each tool chain is managed in its own docker image.
-BiZEPS creates and manages its tool chain images with docker files.
+The Jenkins master runs in a docker container and each build job runs in its own container.
+Each tool chain is managed and maintained in its own docker image.
 
 BiZEPS has the vision to be used on the server as also on the local development machine.
 The corresponding tool chain container could be used from the IDE to build (and run?) the source code.
