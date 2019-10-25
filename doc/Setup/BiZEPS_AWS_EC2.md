@@ -30,6 +30,7 @@ Configure the docker daemon to enable the docker REST API on the network interfa
 
 - Use the [certGenerator utility](/utils/certGenerator/readme.md) to create the required certificates
   - `docker run --rm -u root -v /srv/certs/docker:/var/build bizeps/certgenerator`
+  - Hint: To connect from another docker client make sure to add the host machines name or IP to the certificates, see `SERVER_ALTNAMES`
 - Configure docker daemon to use the certificates
 	- Open `/etc/sysconfig/docker`
   - Add or modify the options line
