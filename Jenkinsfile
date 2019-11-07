@@ -79,6 +79,8 @@ node {
         for (task in cleanupTasks.values()) {
           task.call()
         }
+        // clean up workspace
+        deleteDir()
       }
     }
   }
