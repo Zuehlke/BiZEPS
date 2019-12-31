@@ -1,6 +1,4 @@
-FROM alpine:3.10.3
-
-MAINTAINER Dominik Ebert <doe@zuehlke.com>
+FROM alpine:3.11.2
 
 ARG app_dir=/opt/utils
 ENV target_dir=/var/build
@@ -13,7 +11,7 @@ ARG GID=1000
 
 RUN apk update && apk add --no-cache \
   make=4.2.1-r2 \
-  openssl=1.1.1d-r0 \
+  openssl=1.1.1d-r3 \
   && apk del --purge
 
 # Create user
