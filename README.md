@@ -5,7 +5,7 @@
 #   Documentation
 - [What is BiZEPS](doc/introduction/01_BiZEPS_Introduction.md)
 - [BiZEPS Reference Project](doc/referenceProject/01_BizepsReferenceProject.md)
-- [BiZEPS on AWS](doc/Setup/BiZEPS_AWS_EC2.md)
+- [BiZEPS on AWS](doc/integrations/BiZEPS_AWS_EC2.md)
 
 #   Overview
 BiZEPS realizes the continuous integration build with Jenkins and Docker.
