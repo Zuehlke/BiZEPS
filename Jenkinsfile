@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
 // Uses the common library
-library identifier: 'common-pipeline-library@stable', changelog: false,
+library identifier: 'common-pipeline-library@v0.1', changelog: false,
   retriever: modernSCM([$class: 'GitSCMSource',
     remote: 'git@gitlab.com:ponderbear/pipelinelibrary.git',
     credentialsId: 'jenkins-snowflurry',
