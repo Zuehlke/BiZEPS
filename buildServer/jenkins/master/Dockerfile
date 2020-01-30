@@ -1,4 +1,4 @@
-FROM alpine:3.10.3
+FROM alpine:3.11.3
 MAINTAINER Dominik Ebert <doe@zuehlke.com>
 
 # Modified official Jenkins Dockerfile
@@ -27,7 +27,7 @@ MAINTAINER Dominik Ebert <doe@zuehlke.com>
 # THE SOFTWARE.
 
 ARG CPU_ARCH=x86_64
-ARG DOCKER_CLIENT_VERSION=19.03.4
+ARG DOCKER_CLIENT_VERSION=19.03.5
 
 RUN apk update && apk add --no-cache \
   bash \
@@ -51,8 +51,8 @@ ARG agent_port=50000
 
 # jenkins version being bundled in this docker image and checksum
 ARG JENKINS_VERSION
-ENV JENKINS_VERSION ${JENKINS_VERSION:-2.204.1}
-ARG JENKINS_SHA=12b9ebbf9eb1cd1deab0d11512511bcd80a5d3a754dffab54dd6385d788d5284
+ENV JENKINS_VERSION ${JENKINS_VERSION:-2.204.2}
+ARG JENKINS_SHA=4a90c54c065c8d297f7141174e0b04995f8e28d1ea41332bcc268af19f7371c7
 
 ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
@@ -109,10 +109,11 @@ USER ${user}
 
 COPY resources/jenkins-support /usr/local/bin/jenkins-support
 COPY resources/jenkins.sh /usr/local/bin/jenkins.sh
-ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/jenkins.sh"]
 
-# from a derived Dockerfile, can use `RUN plugins.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
+# Setup and install predefined plugins
 COPY resources/plugins.sh /usr/local/bin/plugins.sh
 COPY resources/install-plugins.sh /usr/local/bin/install-plugins.sh
 COPY resources/plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
+
+ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/jenkins.sh"]
