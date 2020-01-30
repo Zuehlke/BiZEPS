@@ -8,9 +8,10 @@ library identifier: 'common-pipeline-library@v0.1',
     repoOwner: 'icebear8',
     repository: 'pipelineLibrary',
     traits: [
-      [$class: 'org.jenkinsci.plugins.github_branch_source.BranchDiscoveryTrait', strategyId: 1],
-      [$class: 'org.jenkinsci.plugins.github_branch_source.OriginPullRequestDiscoveryTrait', strategyId: 1],
-      [$class: 'org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait', strategyId: 1, trust: [$class: 'TrustContributors']]]))
+      [$class: 'BranchDiscoveryTrait', strategyId: 1],
+      [$class: 'TagDiscoveryTrait', strategyId: 1],
+      [$class: 'OriginPullRequestDiscoveryTrait', strategyId: 1],
+      [$class: 'ForkPullRequestDiscoveryTrait', strategyId: 1, trust: [$class: 'TrustContributors']]]))
 
 node {
 
