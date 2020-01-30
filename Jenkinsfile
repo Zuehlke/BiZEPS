@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
 // Uses the common library form 'https://github.com/icebear8/pipelineLibrary'
-library identifier: 'common-pipeline-library@stable',
+library identifier: 'common-pipeline-library@v0.1',
   retriever: modernSCM(github(
     id: '18306726-fec7-4d80-8226-b78a05add4d0',
     credentialsId: '3bc30eda-c17e-4444-a55b-d81ee0d68981',
