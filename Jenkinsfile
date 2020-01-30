@@ -1,20 +1,15 @@
 #!/usr/bin/env groovy
 
-// Uses the common library form 'https://github.com/icebear8/pipelineLibrary'
-library identifier: 'common-pipeline-library@v0.1',
-  retriever: modernSCM(github(
-    id: '18306726-fec7-4d80-8226-b78a05add4d0',
-    credentialsId: '3bc30eda-c17e-4444-a55b-d81ee0d68981',
-    repoOwner: 'icebear8',
-    repository: 'pipelineLibrary',
-    traits: [
-      [$class: 'BranchDiscoveryTrait', strategyId: 1],
-      [$class: 'TagDiscoveryTrait', strategyId: 1],
-      [$class: 'OriginPullRequestDiscoveryTrait', strategyId: 1],
-      [$class: 'ForkPullRequestDiscoveryTrait', strategyId: 1, trust: [$class: 'TrustContributors']]]))
+// Uses the common library
+library identifier: 'common-pipeline-library@stable', changelog: false,
+  retriever: modernSCM([$class: 'GitSCMSource',
+    remote: 'git@gitlab.com:ponderbear/pipelinelibrary.git',
+    credentialsId: 'jenkins-snowflurry',
+    traits: [gitBranchDiscovery(), gitTagDiscovery(),
+      [$class: 'CloneOptionTrait', extension: [depth: 1, noTags: false, reference: '', shallow: true]]]
+  ])
 
 node {
-
   def projectSettings = readJSON text: '''{
     "repository": {
       "url": "https://github.com/Zuehlke/BiZEPS.git",
