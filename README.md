@@ -1,3 +1,10 @@
+Moving to [GitLab](https://gitlab.com/bi_zeps/jenkins)
+
+[![Gitlab Mainline](https://gitlab.com/bi_zeps/jenkins/badges/master/pipeline.svg)](https://gitlab.com/bi_zeps/jenkins)
+[![Stable Version](https://img.shields.io/docker/v/bizeps/jenkins/stable?color=informational&label=stable)](https://hub.docker.com/repository/docker/bizeps/jenkins)
+[![Docker Pulls](https://badgen.net/docker/pulls/bizeps/jenkins?icon=docker&label=pulls)](https://hub.docker.com/repository/docker/bizeps/jenkins)
+[![Docker Image Size](https://badgen.net/docker/size/bizeps/jenkins/stable?icon=docker&label=size)](https://hub.docker.com/repository/docker/bizeps/jenkins)
+
 ![logo](doc/Logo/BiZEPS_Logo_small.png)
 
 **Zühlke Embedded Build System**
