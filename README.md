@@ -1,6 +1,6 @@
 # Moving to [GitLab](https://gitlab.com/bi_zeps/jenkins)
 
-# <img src="../logos/BiZEPS_Logo_small.jpg" height="50"/> BiZEPS Summary
+# <img src="https://gitlab.com/bi_zeps/_doc/-/raw/master/logos/BiZEPS_Logo_small.jpg" height="50"/> BiZEPS Summary
 [![BiZEPS Documentation](https://badgen.net/badge/Documentation/bizeps/orange?icon=gitlab)](https://gitlab.com/bi_zeps/_doc/-/blob/master/overview.md)
 see [Overview](https://gitlab.com/bi_zeps/_doc/-/blob/master/overview.md)
 
