@@ -1,57 +1,67 @@
 # Moving to [GitLab](https://gitlab.com/bi_zeps/jenkins)
 
-[![Gitlab Mainline](https://gitlab.com/bi_zeps/jenkins/badges/master/pipeline.svg)](https://gitlab.com/bi_zeps/jenkins)
-[![Stable Version](https://img.shields.io/docker/v/bizeps/jenkins/stable?color=informational&label=stable)](https://hub.docker.com/repository/docker/bizeps/jenkins)
-[![Docker Pulls](https://badgen.net/docker/pulls/bizeps/jenkins?icon=docker&label=pulls)](https://hub.docker.com/repository/docker/bizeps/jenkins)
-[![Docker Image Size](https://badgen.net/docker/size/bizeps/jenkins/stable?icon=docker&label=size)](https://hub.docker.com/repository/docker/bizeps/jenkins)
+# <img src="../logos/BiZEPS_Logo_small.jpg" height="50"/> BiZEPS Summary
+[![BiZEPS Documentation](https://badgen.net/badge/Documentation/bizeps/orange?icon=gitlab)](https://gitlab.com/bi_zeps/_doc/-/blob/master/overview.md)
+see [Overview](https://gitlab.com/bi_zeps/_doc/-/blob/master/overview.md)
 
-![logo](doc/Logo/BiZEPS_Logo_small.png)
+[![Open Issues](https://img.shields.io/badge/dynamic/json?color=yellow&logo=gitlab&label=open%20issues&query=%24.statistics.counts.opened&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fgroups%2F7510475%2Fissues_statistics)](https://gitlab.com/groups/bi_zeps/-/issues)
 
-**Zühlke Embedded Build System**
+## <img src="https://assets.gitlab-static.net/uploads/-/system/project/avatar/17864060/jenkins.png" height="50" /> Jenkins
+<!--
+${PROJECT_NAME}=Jenkins
+${PROJECT_NAME_LINK}=jenkins
+${PROJECT_PATH}=bi_zeps/jenkins
+${PROJECT_ID}=17864060
+${IMAGE_NAME}=bizeps/jenkins
+-->
+[![Project](https://badgen.net/badge/project/Jenkins/orange?icon=gitlab)](https://gitlab.com/bi_zeps/jenkins/-/blob/master/README.md#jenkins)
+[![License](https://img.shields.io/badge/dynamic/json?color=orange&label=license&query=%24.license.name&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F17864060%3Flicense%3Dtrue)](https://gitlab.com/bi_zeps/jenkins/-/blob/master/LICENSE)
 
-#   Documentation
-- [What is BiZEPS](doc/introduction/01_BiZEPS_Introduction.md)
-- [BiZEPS Reference Project](doc/referenceProject/01_BizepsReferenceProject.md)
-- [BiZEPS on AWS](doc/integrations/BiZEPS_AWS_EC2.md)
+[![Pipeline Master](https://img.shields.io/gitlab/pipeline/bi_zeps/jenkins/master?label=master&logo=gitlab)](https://gitlab.com/bi_zeps/jenkins)
+[![Open Issues](https://img.shields.io/badge/dynamic/json?color=yellow&logo=gitlab&label=open%20issues&query=%24.statistics.counts.opened&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F17864060%2Fissues_statistics)](https://gitlab.com/bi_zeps/jenkins/-/issues)
 
-#   Overview
-BiZEPS realizes the continuous integration build with Jenkins and Docker.
-The Jenkins master runs in a docker container and each build job runs in its own container.
-Each tool chain is managed and maintained in its own docker image.
+[![Last Commit](https://img.shields.io/badge/dynamic/json?color=green&logo=gitlab&label=last%20commit&query=%24[:1].committed_date&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F17864060%2Frepository%2Fcommits%3Fbranch%3Dmaster)](https://gitlab.com/bi_zeps/jenkins/-/commits/master)
 
-BiZEPS has the vision to be used on the server as also on the local development machine.
-The corresponding tool chain container could be used from the IDE to build (and run?) the source code.
+[![Stable Version](https://img.shields.io/docker/v/bizeps/jenkins/stable?color=informational&label=stable&logo=docker)](https://gitlab.com/bi_zeps/jenkins/-/blob/master/CHANGELOG.md#jenkins)
+[![Docker Pulls](https://badgen.net/docker/pulls/bizeps/jenkins?icon=docker&label=pulls)](https://hub.docker.com/r/bizeps/jenkins)
+[![Docker Image Size](https://badgen.net/docker/size/bizeps/jenkins/stable?icon=docker&label=size)](https://hub.docker.com/r/bizeps/jenkins)
 
-##  BiZEPS Advantages
-### Separation of Tool Chains
-Every tool chain has its own container (virtual context) and runs independent from other containers.
-The installation of a new tool chain does not affect the current tool chains or the Jenkins server.
-BiZEPS is able to support all kind of tool chain in any version at the same time.
+## awsCli
+<!--
+${PROJECT_NAME}=awsCli
+${PROJECT_NAME_LINK}=awscli
+${PROJECT_PATH}=bi_zeps/utils
+${PROJECT_ID}=18136148
+${IMAGE_NAME}=bizeps/awscli
+-->
+[![Project](https://badgen.net/badge/project/awsCli/orange?icon=gitlab)](https://gitlab.com/bi_zeps/utils/-/blob/master/README.md#awscli)
+[![License](https://img.shields.io/badge/dynamic/json?color=orange&label=license&query=%24.license.name&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F18136148%3Flicense%3Dtrue)](https://gitlab.com/bi_zeps/utils/-/blob/master/LICENSE)
 
-### Minimize Idle Resources
-In BiZEPS the Jenkins slaves are only active when there is a job running for their tool chain.
-They are not active (even not in idle mode), when they are not used.
-An idle BiZEPS Jenkins slave only uses disk space.
-And even the used disk space is optimized due to Dockers union file system.
+[![Pipeline Master](https://img.shields.io/gitlab/pipeline/bi_zeps/utils/master?label=master&logo=gitlab)](https://gitlab.com/bi_zeps/utils)
+[![Open Issues](https://img.shields.io/badge/dynamic/json?color=yellow&logo=gitlab&label=open%20issues&query=%24.statistics.counts.opened&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F18136148%2Fissues_statistics)](https://gitlab.com/bi_zeps/utils/-/issues)
 
-### Tool Chain Versions
-For every tool chain a Docker image is created from a Docker file.
-The Dockerfiles are managed by a version control system (git).
-With a properly written Dockerfile any version of a specific image can be recovered at any time.
+[![Last Commit](https://img.shields.io/badge/dynamic/json?color=green&logo=gitlab&label=last%20commit&query=%24[:1].committed_date&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F18136148%2Frepository%2Fcommits%3Fbranch%3Dmaster)](https://gitlab.com/bi_zeps/utils/-/commits/master)
 
-Also Docker it self provides a mechanism to tag and specify image versions.
-As long as the images are on the Docker host or if they are pushed to the Docker Hub Registry,
-the tags can be used to recover a previous image version.
+[![Stable Version](https://img.shields.io/docker/v/bizeps/awscli/stable?color=informational&label=stable&logo=docker)](https://gitlab.com/bi_zeps/utils/-/blob/master/CHANGELOG.md#awscli)
+[![Docker Pulls](https://badgen.net/docker/pulls/bizeps/awscli?icon=docker&label=pulls)](https://hub.docker.com/r/bizeps/awscli)
+[![Docker Image Size](https://badgen.net/docker/size/bizeps/awscli/stable?icon=docker&label=size)](https://hub.docker.com/r/bizeps/awscli)
 
-### Application Updates
-To update an application in BiZEPS, the image of the corresponding container must be updated.
-The current container and the container from the updated image can concurrently run on the Docker Host.
-This means that an application update can be tested before the old container is replaced by the updated container.
-If the updated application container does not behave as expected, a roll back to the previous version can be done.
+## certGenerator
+<!--
+${PROJECT_NAME}=certGenerator
+${PROJECT_NAME_LINK}=certgenerator
+${PROJECT_PATH}=bi_zeps/utils
+${PROJECT_ID}=18136148
+${IMAGE_NAME}=bizeps/certgenerator
+-->
+[![Project](https://badgen.net/badge/project/certGenerator/orange?icon=gitlab)](https://gitlab.com/bi_zeps/utils/-/blob/master/README.md#certgenerator)
+[![License](https://img.shields.io/badge/dynamic/json?color=orange&label=license&query=%24.license.name&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F18136148%3Flicense%3Dtrue)](https://gitlab.com/bi_zeps/utils/-/blob/master/LICENSE)
 
-### Simple Distribution of the Development Environment
-If parts of BiZEPS could also be used on the development machine the developer
-would use the same environment as the build server.
-This means local builds would no more be affected by local installations (e.g. new version of a specific library).
+[![Pipeline Master](https://img.shields.io/gitlab/pipeline/bi_zeps/utils/master?label=master&logo=gitlab)](https://gitlab.com/bi_zeps/utils)
+[![Open Issues](https://img.shields.io/badge/dynamic/json?color=yellow&logo=gitlab&label=open%20issues&query=%24.statistics.counts.opened&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F18136148%2Fissues_statistics)](https://gitlab.com/bi_zeps/utils/-/issues)
 
-The tool chain update could be provided in the same way as for the build server.
+[![Last Commit](https://img.shields.io/badge/dynamic/json?color=green&logo=gitlab&label=last%20commit&query=%24[:1].committed_date&url=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F18136148%2Frepository%2Fcommits%3Fbranch%3Dmaster)](https://gitlab.com/bi_zeps/utils/-/commits/master)
+
+[![Stable Version](https://img.shields.io/docker/v/bizeps/certgenerator/stable?color=informational&label=stable&logo=docker)](https://gitlab.com/bi_zeps/utils/-/blob/master/CHANGELOG.md#certgenerator)
+[![Docker Pulls](https://badgen.net/docker/pulls/bizeps/certgenerator?icon=docker&label=pulls)](https://hub.docker.com/r/bizeps/certgenerator)
+[![Docker Image Size](https://badgen.net/docker/size/bizeps/certgenerator/stable?icon=docker&label=size)](https://hub.docker.com/r/bizeps/certgenerator)
